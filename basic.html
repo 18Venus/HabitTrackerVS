@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #today{
+        width: 200px;
+        color: blanchedalmond;
+        text-align: right;
+        position: relative;
+        float: right;
+        
+    }
+    #quote{
+        color: blanchedalmond;
+    }
+    .head{
+        background-color: rgb(4, 4, 51);
+        height: 50px;
+        padding-top: 25px;
+        padding-left: 20px;
+        padding-right: 20px;
+
+    }
+    body {
+        margin: 0px;
+        padding: 0px;
+        background-image: url("img/bgg.jpg");
+
+        background-repeat: no-repeat;
+        background-size: 1400px 900px;
+    }
+
+</style>
+<body>
+   
+    <div class="head" id="today"></div>
+    <div class="head" id="quote">"Depending on what they are, our habits will either make
+         us or break us. We become what we repeatedly do."</div>
+    <script>
+        const date = new Date();
+        let today=document.getElementById("today");
+        today.append(date.toDateString());
+        
+    </script>
+</body>
+</html>
