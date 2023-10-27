@@ -4,12 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital@1&display=swap" rel="stylesheet">
     
 </head>
 <style>
+   body {
+        margin: 0px;
+        padding: 0px;
+        background-image: url("img/bgg.jpg");
+
+        background-repeat: no-repeat;
+        background-size: 1400px 900px;
+    }
+
     #today{
         width: 200px;
         color: blanchedalmond;
@@ -44,19 +54,12 @@
     --shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     --font-family: consolas;
   }
-  .contianer {
-    width: max-content;
-    height: max-content;
-    position: relative;
-    margin-bottom: 20px;
-    margin-left: 50px;
-    padding: 2% 0px 0px 0px;
-    justify-content: center;
-    top: 10%;
-    right: 0%;
-    width: 100%;
-    height: 100%;
+
+  .board{
+    float: inline-start;
   }
+
+
   .calendar {
     height: 610px;
     width: max-content;
@@ -64,6 +67,7 @@
     border-radius: 25px;
     overflow: hidden;
     padding: 30px 50px 0px 50px;
+    float: inline-end;
   }
   .calendar {
     box-shadow: var(--shadow);
@@ -325,18 +329,9 @@
       margin: 5px 0px;
     }
   }
+  
 
 
-
-
-    body {
-        margin: 0px;
-        padding: 0px;
-        background-image: url("img/bgg.jpg");
-
-        background-repeat: no-repeat;
-        background-size: 1400px 900px;
-    }
 
 </style>
 <body>
@@ -345,6 +340,36 @@
     <div class="head" id="quote">"Depending on what they are, our habits will either make
          us or break us. We become what we repeatedly do."</div>
          <div class="contianer">
+          <div class="board">
+            <form id="todo-form">
+              <input type="text" placeholder="New Habit..." id="todo-input" />
+              <button type="submit">Add +</button>
+            </form>
+      
+            <div class="lanes">
+              <div class="swim-lane" id="todo-lane">
+                <h3 class="heading">Yet To Complete</h3>
+      
+                <p class="task" draggable="true">Study 2 hours</p>
+                <p class="task" draggable="true">Feed the dogs</p>
+                <p class="task" draggable="true">Go For An Evening Walk</p>
+              </div>
+      
+              <div class="swim-lane">
+                <h3 class="heading">Doing</h3>
+      
+                <p class="task" draggable="true">Cook Lunch</p>
+              </div>
+      
+              <div class="swim-lane">
+                <h3 class="heading">Completed!</h3>
+      
+                <p class="task" draggable="true">
+                  Wake up before 7am
+                </p>
+              </div>
+            </div>
+          </div>
             <div class="calendar">
               <div class="calendar-header">
                 <span class="month-picker" id="month-picker"> October </span>
@@ -384,6 +409,7 @@
               <div class="month-list"></div>
             </div>
           </div>
+          
 
     <script>
         const date = new Date();
@@ -470,8 +496,11 @@
         
     }
     calendar_days.appendChild(day);
+    
     }
-    };
+    }
+    
+
     let month_list = calendar.querySelector('.month-list');
     month_names.forEach((e, index) => {
     let month = document.createElement('div');
@@ -540,7 +569,8 @@
     )}: ${`${timer.getSeconds()}`.padStart(2, '0')}`;
     todayShowTime.textContent = formateTimer;
   }, 1000);
-  
+ 
+
     
 
     </script>
