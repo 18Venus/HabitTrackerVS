@@ -9,32 +9,36 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital@1&display=swap" rel="stylesheet">
     
+    
 </head>
 <style>
    body {
         margin: 0px;
         padding: 0px;
-        background-image: url("img/bgg.jpg");
-
-        background-repeat: no-repeat;
-        background-size: 1400px 900px;
+        background-image: url("img/pinkbgg.jpg");
+        background-repeat: initial;
+        
+        
     }
 
     #today{
         width: 200px;
-        color: blanchedalmond;
+        color:black;
         text-align: right;
         position: relative;
-        float: right;
+        float: inline-end;
         font-family: 'Josefin Sans', sans-serif;
         
     }
     #quote{
         color: black;
         font-family: 'Josefin Sans', sans-serif;
+        float: inline-start;
+        font-size: xx-large;
+        
     }
     .head{
-        background-color: #9796f0;
+        
         height: 45px;
         padding-top: 28px;
         padding-left: 20px;
@@ -57,21 +61,114 @@
 
   .board{
     float: inline-start;
+    font-family: 'Josefin Sans', sans-serif;
   }
 
 
   .calendar {
-    height: 610px;
+    height: 550px;
     width: max-content;
     background-color: white;
     border-radius: 25px;
     overflow: hidden;
-    padding: 30px 50px 0px 50px;
+    padding: 10px 50px 0px 50px;
     float: inline-end;
+    margin-right: 20px;
   }
   .calendar {
     box-shadow: var(--shadow);
   }
+  #todo-form {
+  padding: 32px 32px 0;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+#todo-form input {
+  padding: 12px;
+  margin-right: 12px;
+  width: 225px;
+
+  border-radius: 4px;
+  border: none;
+
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
+  background: white;
+
+  font-size: 14px;
+  outline: none;
+}
+
+#todo-form button {
+  padding: 12px 32px;
+
+  border-radius: 4px;
+  border: none;
+
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
+  background: #ffffff;
+  color: black;
+
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+
+.heading {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+.lanes {
+  display: flex;
+  align-items: flex-start;
+  justify-content: start;
+  gap: 16px;
+
+  padding: 24px 32px;
+
+ 
+  height: 100%;
+}
+
+.swim-lane {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  background: #ab78c1;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
+
+  padding: 12px;
+  border-radius: 4px;
+  width: 225px;
+  min-height: 120px;
+
+  flex-shrink: 0;
+}
+.swim-lane{
+    box-shadow: var(--shadow);
+  }
+
+.task {
+  background: white;
+  color: black;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+
+  padding: 12px;
+  border-radius: 4px;
+
+  font-size: 16px;
+  cursor: move;
+}
+
+.is-dragging {
+  scale: 1.05;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
+  background: rgb(50, 50, 50);
+  color: white;
+}
+
   .calendar-header {
     background: #f19bdf;
     display: flex;
@@ -79,11 +176,10 @@
     align-items: center;
     font-weight: 700;
     color: var(--white);
-    padding: 10px;
+    padding: 3px;
+    border-radius: 10px;
   }
-  .calendar-body {
-    pad: 10px;
-  }
+  
   .calendar-week-days {
     font-family: 'Josefin Sans', sans-serif;
     display: grid;
@@ -106,7 +202,7 @@
   .calendar-days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 2px;
+    gap: 5px;
     color: var(--color-txt);
   }
   .calendar-days div {
@@ -337,8 +433,7 @@
 <body>
    
     <div class="head" id="today"></div>
-    <div class="head" id="quote">"Depending on what they are, our habits will either make
-         us or break us. We become what we repeatedly do."</div>
+    <div class="head" id="quote">"Each day is an opportunity to craft your best life!!"</div>
          <div class="contianer">
           <div class="board">
             <form id="todo-form">
@@ -569,7 +664,34 @@
     )}: ${`${timer.getSeconds()}`.padStart(2, '0')}`;
     todayShowTime.textContent = formateTimer;
   }, 1000);
- 
+
+  const form = document.getElementById("todo-form");
+const input = document.getElementById("todo-input");
+const todoLane = document.getElementById("todo-lane");
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const value = input.value;
+
+  if (!value) return;
+
+  const newTask = document.createElement("p");
+  newTask.classList.add("task");
+  newTask.setAttribute("draggable", "true");
+  newTask.innerText = value;
+
+  newTask.addEventListener("dragstart", () => {
+    newTask.classList.add("is-dragging");
+  });
+
+  newTask.addEventListener("dragend", () => {
+    newTask.classList.remove("is-dragging");
+  });
+
+  todoLane.appendChild(newTask);
+
+  input.value = "";
+});
 
     
 
