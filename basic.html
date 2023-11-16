@@ -217,7 +217,7 @@
     cursor: pointer;
     animation: to-top 1s forwards;
   }
-  
+
 
   .month-picker {
     font-family: 'Josefin Sans', sans-serif;
@@ -594,6 +594,7 @@
 
         
     }
+   
     calendar_days.appendChild(day);
     
     }
@@ -634,6 +635,11 @@
   let currentMonth = { value: currentDate.getMonth() };
   let currentYear = { value: currentDate.getFullYear() };
   generateCalendar(currentMonth.value, currentYear.value);
+  function selectDate(day, month, year) {
+    const selectedDate = new Date(year, month, day);
+   
+}
+
 
   const todayShowTime = document.querySelector('.time-formate');
   const todayShowDate = document.querySelector('.date-formate');
